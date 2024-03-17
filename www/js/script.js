@@ -1,0 +1,1 @@
+var f=void 0;var y={top:70,right:30,bottom:40,left:80},z=460-y.left-y.right,A=400-y.top-y.bottom,p=document.getElementById("stats"),L=f.reduce((h,[,b])=>{return h.min=Math.min(h.min,b),h.max=Math.max(h.max,b),h},{min:Number.POSITIVE_INFINITY,max:Number.NEGATIVE_INFINITY});console.log(L);p.innerHTML=`Min: ${L.min} Max: ${L.max}`;
