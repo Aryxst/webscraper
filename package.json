@@ -3,11 +3,11 @@
  "module": "src/scrape.ts",
  "type": "module",
  "scripts": {
-  "start": "rm -rf ./out/*;rm -rf ./out-img/*;rm -rf ./www/out.json;bun --bun src/scrape.ts",
+  "start": "rm -rf ./out/*;rm -rf ./out-img/*;rm -rf ./www/data.json;bun --bun src/scrape.ts",
   "server": "bun run --watch src/server.ts",
   "build:css": "rm -rf ./www/css/*.min*;tailwindcss --watch --minify -i ./src/styles/global.scss -o ./www/css/global.min.css",
-  "build:js": "bun build ./www/js/script.ts --outdir ./www/js --target browser --minify --watch --naming --entry-naming [dir]/[name].min.[ext]",
-  "dev": "concurrently -k -r \"bun run server\" \"bun run --bun build:css\" \"bun run build:js\""
+  "build:js": "bun build ./www/js/*.js --outdir ./www/js --target browser --minify --watch --naming --entry-naming [dir]/[name].min.[ext]",
+  "dev": "test -e ./www/data.json && concurrently -k -r \"bun run server\" \"bun run --bun build:css\" \"bun run build:js\"|| echo \"Please run 'bun start' before 'bun dev'\""
  },
  "devDependencies": {
   "@types/bun": "latest",
@@ -23,6 +23,7 @@
   "autoprefixer": "^10.4.18",
   "chalk": "^5.3.0",
   "d3": "latest",
+  "flowbite": "^2.3.0",
   "squirrelly": "latest",
   "tailwindcss": "^3.4.1"
  }

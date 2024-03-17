@@ -1,8 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+:root {
+ --bg-primary: #374151;
+ --bg-secondary: #111827;
+ --bg-off: #494949;
+ --text-primary: #ffffff;
+}
 body {
-  padding: 2em;
-  font-family: "Poppins", sans-serif;
+ font-family: 'Poppins', sans-serif;
+ background-color: var(--bg-secondary);
+ color: var(--text-primary);
 }

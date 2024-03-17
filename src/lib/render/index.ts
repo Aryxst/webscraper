@@ -27,7 +27,9 @@ export default {
  layout(lt: string) {
   const lt_ = 'lt_' + lt;
 
-  (!cache.has(lt_) && cache.set(lt_, readFileSync(`src/views/layouts/${lt}`, { encoding: 'utf8' }))) || console.trace(`Already has template "${lt}"! ***Nor a warning/error***`);
+  /* (!cache.has(lt_) && cache.set(lt_, readFileSync(`src/views/layouts/${lt}`, { encoding: 'utf8' }))) || console.trace(`Already has template "${lt}"! ***Nor a warning/error***`); */
+  // only during development disable the line above
+  cache.set(lt_, readFileSync(`src/views/layouts/${lt}`, { encoding: 'utf8' }));
   return lt_;
  },
  out() {

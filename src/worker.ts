@@ -3,7 +3,7 @@ import { regexps } from './namings';
 declare var self: Worker;
 const outDir = import.meta.dir + '/../out';
 self.onmessage = async ({ data: urls }: MessageEvent) => {
- const requests: [string, number, number, boolean, Array<string | null>][] = [];
+ const requests: [string, number, number, boolean, Array<string>][] = [];
  for (let i = 0; i < urls.length; i++) {
   const url = new URL(urls[i]);
   const tick = performance.now();
@@ -79,14 +79,16 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
    // Get the text content of the file
    const text = await file.text();
    // Get the matched regexps
-   const matchedExps = Object.keys(regexps).map((k, i) => {
-    // @ts-ignore
-    // The readonly is for getting suggestions in the namings.ts file while assign object values to the default export, so this isn't type safe.
-    if (regexps[k].some((exp: RegExp) => exp.test(text))) return k;
-    return null;
-   });
+   const matchedExps = Object.keys(regexps)
+    .map((k, i) => {
+     // @ts-ignore
+     // The readonly is for getting suggestions in the namings.ts file while assign object values to the default export, so this isn't type safe.
+     if (regexps[k].some((exp: RegExp) => exp.test(text))) return k;
+     return;
+    })
+    .filter((x) => x !== undefined) as Array<string>;
    // Push the site url, the time it took to fetch it, the size of the file, whether the request was successful and the matched regexps
-   requests.push([url.href, performance.now() - tick, file.size, success, matchedExps]);
+   requests.push([url.href, Math.round(performance.now() - tick), file.size, success, matchedExps]);
   } catch (err) {
    console.error(`Failed to process ${url}:`, err);
   }

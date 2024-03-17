@@ -15,8 +15,9 @@ export const regexps = {
  webpack: [/window.webpackJsonp/, /__webpack_require__/, /__webpack_module_/, /__webpack_exports__/],
  jquery: [/jquery.org\/license/, /jquery-migrate/, /jquery.*(js)/],
  bootstrap: [/bootstrapcdn.com/, /http:\/\/getbootstrap.com/],
+ astro: [/_astro/, /Astro v/],
 } as const;
-
+export type rawStack = keyof typeof regexps;
 export default {
  cloudflareanalytics: { name: 'Cloudflare Browser Insights' },
  cloudinary: { name: 'Cloudinary' },
@@ -32,4 +33,8 @@ export default {
  tailwindcss: { name: 'Tailwind CSS' },
  vue: { name: 'Vue.js' },
  webpack: { name: 'Webpack' },
-} as Record<keyof typeof regexps, { name: string; icon?: string }>;
+ astro: { name: 'Astro' },
+ bootstrap: { name: 'Bootstrap CSS' },
+ jquery: { name: 'jQuery' },
+} as Record<rawStack, { name: string; icon?: string }>;
+// add emoticon,zendesk,marko,paypal,stripe,styled-components,tanstack,recaptcha,

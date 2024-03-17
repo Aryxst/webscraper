@@ -1,6 +1,6 @@
 /// <reference lib="DOM"/>
 /// <reference lib="DOM.Iterable"/>
-import * as d3 from 'd3';
+/* import * as d3 from 'd3';
 import data from '../out.json' with { type: 'json' };
 // set the dimensions and margins of the graph
 var margin = { top: 70, right: 30, bottom: 40, left: 80 },
@@ -18,4 +18,7 @@ const minMax = data.reduce(
  { min: Number.POSITIVE_INFINITY, max: Number.NEGATIVE_INFINITY },
 );
 console.log(minMax);
-stats.innerHTML = `Min: ${minMax.min} Max: ${minMax.max}`;
+stats.innerHTML = `Min: ${minMax.min} Max: ${minMax.max}`; */
+document.addEventListener('DOMContentLoaded', () => {
+ console.log('Loaded');
+});

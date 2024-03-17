@@ -3,17 +3,16 @@
  <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ it.title }}</title>
+  <title>{{ "Scrap - " + it.title }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/global.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
  </head>
  <body>
-  {{ it.body | safe }}
-  <!--Simple footer-->
-  <footer>
-   <p>© 2022 - 2023 {{ it.title }}. All rights reserved.</p>
-  </footer>
+  {{@include("navbar")/}}
+  <main class="min-h-screen">{{ it.body | safe }}</main>
+  {{@include("footer")/}}
  </body>
 </html>
