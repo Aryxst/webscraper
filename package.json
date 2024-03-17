@@ -3,10 +3,10 @@
  "module": "src/scrape.ts",
  "type": "module",
  "scripts": {
-  "start": "rm -rf out/* out-img/* www/out.json;bun --bun src/scrape.ts",
+  "start": "rm -rf ./out/*;rm -rf ./out-img/*;rm -rf ./www/out.json;bun --bun src/scrape.ts",
   "server": "bun run --watch src/server.ts",
   "build:css": "rm -rf ./www/css/*.min*;tailwindcss --watch --minify -i ./src/styles/global.scss -o ./www/css/global.min.css",
-  "build:js": "bun build ./www/js/script.ts --outdir ./www/js --target browser --minify --watch",
+  "build:js": "bun build ./www/js/script.ts --outdir ./www/js --target browser --minify --watch --naming --entry-naming [dir]/[name].min.[ext]",
   "dev": "concurrently -k -r \"bun run server\" \"bun run --bun build:css\" \"bun run build:js\""
  },
  "devDependencies": {

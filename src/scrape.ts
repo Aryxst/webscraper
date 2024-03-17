@@ -28,7 +28,7 @@ async function run(jobs: any, concurrentWorkers: number) {
    result.push(...event.data);
    if (completedChunks === chunks.length) {
     log('i', `${chunks.length} ${chunks.length == 1 ? 'worker' : 'workers'} took ${performance.now() - tick}ms to complete`);
-    Bun.write('out.json', JSON.stringify(result));
+    Bun.write('www/data.json', JSON.stringify(result));
     process.exit();
    }
   };

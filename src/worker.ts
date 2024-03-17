@@ -53,7 +53,7 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
        }
       },
      })
-     // This happens in svelte, where they preload modules
+     // This happens in Svelte/SvelteKit, where they preload modules
      .on('link[rel="modulepreload"]', {
       async element(el) {
        try {
