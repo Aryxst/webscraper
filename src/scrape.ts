@@ -1,8 +1,9 @@
-import log from './lib/log';
 import os from 'os';
-import { chunkify } from './utils/manipulate';
+import log from './lib/log';
+import { chunkify } from './utils';
+import type { RequestResult } from './worker';
 const cpus = os.cpus();
-const urls = (await Bun.file('sample.txt').text()).split('\n');
+const urls = (await Bun.file('sample.txt').text()).split('\n').filter((x) => x);
 
 console.clear();
 log('i', 'Loading sample.txt...');
@@ -15,7 +16,7 @@ if (!threadCount || threadCount > cpus.length || threadCount == 0) throw Error('
 async function run(jobs: any, concurrentWorkers: number) {
  const chunks = chunkify(jobs, concurrentWorkers).filter((x) => x.length > 0);
  const tick = performance.now();
- const result: any[] = [];
+ const result: RequestResult[] = [];
  let completedChunks = 0;
  chunks.forEach((data, i) => {
   const workerURL = new URL(`${workerToRun == '1' ? 'worker' : 'worker-img'}.ts`, import.meta.url).href;
@@ -24,7 +25,6 @@ async function run(jobs: any, concurrentWorkers: number) {
   worker.onmessage = (event) => {
    completedChunks++;
    console.log(`Worker ${i} completed`);
-   console.log(completedChunks, chunks.length);
    result.push(...event.data);
    if (completedChunks === chunks.length) {
     log('i', `${chunks.length} ${chunks.length == 1 ? 'worker' : 'workers'} took ${performance.now() - tick}ms to complete`);
@@ -36,5 +36,6 @@ async function run(jobs: any, concurrentWorkers: number) {
    console.log(`Worker ${i} started`);
   });
  });
+ console.log(chunks);
 }
 run(urls, threadCount);

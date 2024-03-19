@@ -1,4 +1,19 @@
-# DISCLAIMER
+# Scrap
 
-THIS IS A QUICK TOOL BUILT WITH BUN, IT IS NOT INTENDED TO BE USED FOR REAL WEB SCRAPING INTENDED TO ATTACK BUSINESSES.
-IT IS A TOOL TO, AS A DEVELOPER, USE SOME REGEX TO KNOW QUICKLY WHAT OTHER DEVELOPERS USE TO BUILD THEIR WEBSITES.
+Simple Web Scraper in Typescript, add custom regexps to src/namings.ts
+This is a dummy project I had to build for testing my "SquirrellyJS app router".
+
+## Requirements
+
+- [Bun](https://bun.sh/)
+- WSL, Linux or MacOS
+
+To install `bun` run:
+
+`curl -fsSL https://bun.sh/install | bash`
+
+---
+
+## Usage
+
+Run `bun start` to scrape websites in `sample.txt` and then run `bun dev` to get the webview

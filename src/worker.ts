@@ -1,9 +1,11 @@
 import { regexps } from './namings';
+import { parseUrl } from './utils';
 
 declare var self: Worker;
+export type RequestResult = [string, number, number, boolean, Array<string>];
 const outDir = import.meta.dir + '/../out';
 self.onmessage = async ({ data: urls }: MessageEvent) => {
- const requests: [string, number, number, boolean, Array<string>][] = [];
+ const requests: RequestResult[] = [];
  for (let i = 0; i < urls.length; i++) {
   const url = new URL(urls[i]);
   const tick = performance.now();
@@ -19,14 +21,9 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
      .on("link[rel='stylesheet']", {
       async element(el) {
        try {
-        let href = el.getAttribute('href');
-        if (!href || href === '/') return;
-        if (href.startsWith('//')) {
-         href = `https:${href}`;
-        } else if (href.startsWith('/')) {
-         href = url.origin + href;
-        }
-        const cssRes = await fetch(href);
+        const src = parseUrl(el.getAttribute('href')!, url.origin);
+        if (!src) return;
+        const cssRes = await fetch(src);
         writer.write(await cssRes.arrayBuffer());
 
         writer.flush();
@@ -38,13 +35,8 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
      .on('script', {
       async element(el) {
        try {
-        let src = el.getAttribute('src');
-        if (!src || src === '/') return;
-        if (src.startsWith('//')) {
-         src = `https:${src}`;
-        } else if (src.startsWith('/')) {
-         src = url.origin + src;
-        }
+        const src = parseUrl(el.getAttribute('src')!, url.origin);
+        if (!src) return;
         const jsRes = await fetch(src);
         writer.write(await jsRes.arrayBuffer());
         writer.flush();
@@ -57,13 +49,8 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
      .on('link[rel="modulepreload"]', {
       async element(el) {
        try {
-        let src = el.getAttribute('href');
-        if (!src || src === '/') return;
-        if (src.startsWith('//')) {
-         src = `https:${src}`;
-        } else if (src.startsWith('/')) {
-         src = url.origin + src;
-        }
+        const src = parseUrl(el.getAttribute('href')!, url.origin);
+        if (!src) return;
         const jsRes = await fetch(src);
         writer.write(await jsRes.arrayBuffer());
         writer.flush();
@@ -86,7 +73,7 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
      if (regexps[k].some((exp: RegExp) => exp.test(text))) return k;
      return;
     })
-    .filter((x) => x !== undefined) as Array<string>;
+    .filter((x) => x) as Array<string>;
    // Push the site url, the time it took to fetch it, the size of the file, whether the request was successful and the matched regexps
    requests.push([url.href, Math.round(performance.now() - tick), file.size, success, matchedExps]);
   } catch (err) {

@@ -1,6 +1,7 @@
 import { render, renderFile } from 'squirrelly';
 import { readFileSync } from 'fs';
 import './defines';
+import { recurseProp } from '../../utils';
 const cache = new Map();
 const res = { headers: { 'Content-Type': 'text/html' } };
 export default {
@@ -26,13 +27,19 @@ export default {
  },
  layout(lt: string) {
   const lt_ = 'lt_' + lt;
-
   /* (!cache.has(lt_) && cache.set(lt_, readFileSync(`src/views/layouts/${lt}`, { encoding: 'utf8' }))) || console.trace(`Already has template "${lt}"! ***Nor a warning/error***`); */
   // only during development disable the line above
   cache.set(lt_, readFileSync(`src/views/layouts/${lt}`, { encoding: 'utf8' }));
   return lt_;
  },
  out() {
-  console.log(cache, cache.keys());
+  console.log(cache.keys());
  },
+ /*  with(data: Array<any>, options: { layout: string; rootAccessor?: string; nameAccessor: string; accessor: string; out: string }) {
+  for (let i = 0; i < (options.rootAccessor ? recurseProp(data, options.rootAccessor) : data).length; i++) {
+   const viewData = recurseProp(data, options.accessor);
+   const viewName = `v_${options.out}/${recurseProp(data, options.nameAccessor)}`;
+   cache.set(viewName, cache.get(this.layout(options.layout)));
+  }
+ }, */
 };
