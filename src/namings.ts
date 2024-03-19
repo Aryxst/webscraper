@@ -1,6 +1,6 @@
 export const regexps = {
  next: [/_next/],
- googlefonts: [/font.googleapis/, /fonts.gstatic/],
+ googlefonts: [/fonts.googleapis.com/],
  tailwindcss: [/MIT License | https:\/\/tailwindcss.com/, /--tw-/],
  lenis: [/lenis/],
  cloudinary: [/res.cloudinary.com/],
@@ -38,6 +38,7 @@ export const regexps = {
  youtubeplayer: [/YouTubePlayer/],
  emotion: [/@emotion\/css/],
  angular: [/ng-bind/],
+ solidjs: [/Symbol\(\"solid-proxy\"\)/],
 } as const;
 export type rawStack = keyof typeof regexps;
 export default {
@@ -80,4 +81,5 @@ export default {
  youtubeplayer: { name: 'Youtube Player' },
  emotion: { name: 'Emotion CSS' },
  angular: { name: 'Angular' },
+ solidjs: { name: 'SolidJS' },
 } satisfies Record<rawStack, { name: string; icon?: string }>;

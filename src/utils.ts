@@ -23,7 +23,7 @@ function parseUrl(src: string, origin: string) {
  } else if (src.startsWith('/')) {
   return origin + src;
  }
- return src;
+ return `${origin}/${src}`;
 }
 // TODO: Add support for nested properties(object, and nested objects and arrays) => function selfCall and remove loop
 function recurseProp(data: any, accessor: string) {
