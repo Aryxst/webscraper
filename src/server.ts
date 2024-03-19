@@ -18,4 +18,5 @@ Bun.serve({
   return new Response('Not found', { status: 404 });
  },
 });
+
 console.log('Listening on http://localhost:3000');
