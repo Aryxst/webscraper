@@ -63,9 +63,7 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
      .arrayBuffer(),
    );
    writer.end();
-   // Get the text content of the file
    const text = await file.text();
-   // Get the matched regexps
    const matchedExps = Object.keys(regexps)
     .map((k, i) => {
      // @ts-ignore
@@ -73,7 +71,7 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
      if (regexps[k].some((exp: RegExp) => exp.test(text))) return k;
      return;
     })
-    .filter((x) => x) as Array<string>;
+    .filter(x => x) as Array<string>;
    // Push the site url, the time it took to fetch it, the size of the file, whether the request was successful and the matched regexps
    requests.push([url.href, Math.round(performance.now() - tick), file.size, success, matchedExps]);
   } catch (err) {
