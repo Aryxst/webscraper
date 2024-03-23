@@ -39,6 +39,7 @@ export const regexps = {
  emotion: [/@emotion\/css/],
  angular: [/ng-bind/],
  solidjs: [/Symbol\(\"solid-proxy\"\)/],
+ quick: [/qwikloader/, /quickevents/],
 } as const;
 export type rawStack = keyof typeof regexps;
 export default {
