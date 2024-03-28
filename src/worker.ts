@@ -80,5 +80,3 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
  }
  self.postMessage(requests);
 };
-// what it does is that from each link, and script it gets its src and href, and fetches them
-// this builds up a pretty huge file
