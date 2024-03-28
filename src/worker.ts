@@ -10,7 +10,7 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
   const url = new URL(urls[i]);
   const tick = performance.now();
   try {
-   const res = await fetch(url);
+   const res = await fetch(url.href);
    const success = res.status < 400;
    const dest = `${outDir}/[${url.href.replaceAll('/', '-')}].txt`;
    const file = Bun.file(dest);
@@ -80,3 +80,5 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
  }
  self.postMessage(requests);
 };
+// what it does is that from each link, and script it gets its src and href, and fetches them
+// this builds up a pretty huge file

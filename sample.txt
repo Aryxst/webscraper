@@ -1,1 +1,1 @@
-https://minecraft-modded-servers.vercel.app
+https://minecraft-modded-servers.vercel.app/
