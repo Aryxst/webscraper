@@ -1,6 +1,6 @@
 export const regexps = {
  next: [/_next/],
- googlefonts: [/fonts\.googleapis\.com/],
+ googlefonts: [/fonts\.googleapis\.com/, /fonts\.gstatic\.com/],
  tailwindcss: [/MIT License | https:\/\/tailwindcss\.com/, /--tw-/],
  lenis: [/lenis/],
  cloudinary: [/res.cloudinary.com/],
@@ -83,4 +83,5 @@ export default {
  emotion: { name: 'Emotion CSS' },
  angular: { name: 'Angular' },
  solidjs: { name: 'SolidJS' },
+ quick: { name: 'QuickJS' },
 } satisfies Record<rawStack, { name: string; icon?: string }>;

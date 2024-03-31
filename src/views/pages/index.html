@@ -1,1 +1,46 @@
-<div><h1>Hello World!</h1></div>
+<div>
+ <div>
+  {{@if(it.data.length > 1)}}
+  <table>
+   <thead>
+    <tr>
+     <th scope="col">Total Response Time(ms)</th>
+     <th scope="col">Average Response Time(ms)</th>
+     <th scope="col">Success Ratio</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>{{it.data | getProp(1) | sum}}</td>
+     <td>{{it.data | getProp(1) | avg}}</td>
+     <td>{{it.data | getProp(3) | defRatio | percentage }}%</td>
+    </tr>
+   </tbody>
+  </table>
+  {{/if}}
+  <!---->
+  <table>
+   <thead>
+    <tr>
+     <th scope="col">Site URL</th>
+     <th scope="col">Response Time(ms)</th>
+     <th scope="col">Size</th>
+     <th scope="col">Success</th>
+     <th scope="col">Stacks</th>
+    </tr>
+   </thead>
+   <tbody>
+    <!---->
+    {{@each(it.data) => [siteUrl,timeTaken,bytes,success,stacks], index}}
+    <tr>
+     <th scope="row" data-siteurl="{{siteUrl}}"><a href="{{siteUrl}}">{{siteUrl}}</a></th>
+     <td>{{timeTaken}}</td>
+     <td>{{bytes}}({{bytes | size}})</td>
+     <td>{{success}}</td>
+     <td>{{stacks | joinStacksName}}</td>
+    </tr>
+    {{/each}}
+   </tbody>
+  </table>
+ </div>
+</div>
