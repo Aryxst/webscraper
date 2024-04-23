@@ -25,23 +25,5 @@ function parseUrl(src: string, origin: string) {
  }
  return `${origin}/${src}`;
 }
-// TODO: Add support for nested properties(object, and nested objects and arrays) => function selfCall and remove loop
-function recurseProp(data: any, accessor: string) {
- const splatAccessor = accessor.split(/(\.|\[\])/).filter((x) => !(x === '.'));
- console.log(splatAccessor);
- let res: any;
- if (typeof data == 'object') {
-  for (let i = 0; i < splatAccessor.length; i++) {
-   res = data[splatAccessor[i]];
-   if (typeof res != 'object') break;
-   data = res;
-  }
- } else if (Array.isArray(data)) {
-  for (let i = 0; i < splatAccessor.length; i++) {
-   res = data[+splatAccessor[i]];
-  }
- }
- return res;
-}
 
-export { size, countLineBreaks, chunkify, parseUrl, recurseProp };
+export { size, countLineBreaks, chunkify, parseUrl };
