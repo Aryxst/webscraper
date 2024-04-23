@@ -22,6 +22,8 @@ function parseUrl(src: string, origin: string) {
   return `https:${src}`;
  } else if (src.startsWith('/')) {
   return origin + src;
+ } else if (src.startsWith('http')) {
+  return src;
  }
  return `${origin}/${src}`;
 }
