@@ -40,6 +40,7 @@ export const regexps = {
  angular: [/ng-bind/],
  solidjs: [/Symbol\(\"solid-proxy\"\)/],
  quick: [/qwikloader/, /quickevents/],
+ umami: [/analytics.us.umami.is\/script.js/],
 } as const;
 export type rawStack = keyof typeof regexps;
 export default {
@@ -84,4 +85,5 @@ export default {
  angular: { name: 'Angular' },
  solidjs: { name: 'SolidJS' },
  quick: { name: 'QuickJS' },
+ umami: { name: 'Umami' },
 } satisfies Record<rawStack, { name: string; icon?: string }>;
