@@ -6,7 +6,7 @@ export const regexps = {
  cloudinary: [/res.cloudinary.com/],
  fontawesome: [/\/fontawesome/],
  vue: [/vue/],
- react: [/https:\/\/reactjs\.org\/docs\/error-decoder\.html/, /react\.forward_ref/, /__reactInternal/, /ReactComponent/],
+ react: [/https:\/\/reactjs\.org\/docs\/error-decoder\.html/, /react\.forward_ref/, /__reactInternal/, /ReactComponent/, /ReactComponent/, /isReactComponent/, /react\.element/],
  sveltekit: [/data-sveltekit/, /x-sveltekit-/],
  svelte: [/window.__svelte/, /svelte-announcer/],
  nuxt: [/_nuxt/, /window\.__NUXT__/],
