@@ -25,8 +25,6 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
         if (!src) return;
         const cssRes = await fetch(src);
         writer.write(await cssRes.arrayBuffer());
-
-        writer.flush();
        } catch (err) {
         console.error(`Failed to fetch css for ${url}:`, err);
        }
@@ -39,7 +37,6 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
         if (!src) return;
         const jsRes = await fetch(src);
         writer.write(await jsRes.arrayBuffer());
-        writer.flush();
        } catch (err) {
         console.error(`Failed to fetch js for ${url}:`, err);
        }
@@ -53,7 +50,6 @@ self.onmessage = async ({ data: urls }: MessageEvent) => {
         if (!src) return;
         const jsRes = await fetch(src);
         writer.write(await jsRes.arrayBuffer());
-        writer.flush();
        } catch (err) {
         console.error(`Failed to fetch js for ${url}:`, err);
        }
